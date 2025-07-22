@@ -1,6 +1,6 @@
 package com.xaarlox.todo_list.ui.viewmodels.mvvm
 
-import com.xaarlox.domain.model.Todo
+import com.xaarlox.todo_list.domain.model.Todo
 
 sealed class TodosEvent {
     data class OnDeleteTodoClick(val todo: Todo) : TodosEvent()

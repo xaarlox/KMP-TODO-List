@@ -1,4 +1,4 @@
-package com.xaarlox.domain.model
+package com.xaarlox.todo_list.domain.model
 
 data class Todo(
     val id: Int? = null,

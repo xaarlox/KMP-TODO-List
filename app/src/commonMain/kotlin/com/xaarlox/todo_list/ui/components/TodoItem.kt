@@ -18,7 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.xaarlox.domain.model.Todo
+import com.xaarlox.todo_list.domain.model.Todo
 import com.xaarlox.todo_list.ui.theme.LightPurple
 import com.xaarlox.todo_list.ui.theme.MyPurple
 import com.xaarlox.todo_list.ui.viewmodels.mvvm.TodosEvent
