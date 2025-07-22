@@ -39,6 +39,8 @@ kotlin {
             implementation(compose.components.resources)
             implementation(compose.components.uiToolingPreview)
             api(libs.navigation.compose)
+            implementation(libs.bundles.koin.compose)
+            implementation(libs.koin.core)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
