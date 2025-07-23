@@ -15,13 +15,17 @@ actual class TodoRepository {
     private val _todosFlow = MutableStateFlow(dummyTodo.toList())
 
     actual suspend fun insertTodo(todo: Todo) {
-        val newTodo = if ((todo.id ?: 0) <= 0) {
+        todo.id?.takeIf { it > 0 }?.let { id ->
+            val index = dummyTodo.indexOfFirst { it.id == id }
+            if (index != -1) {
+                dummyTodo[index] = todo
+            } else {
+                dummyTodo.add(todo)
+            }
+        } ?: run {
             val newId = (dummyTodo.mapNotNull { it.id }.maxOrNull() ?: 0) + 1
-            todo.copy(id = newId)
-        } else {
-            todo
+            dummyTodo.add(todo.copy(id = newId))
         }
-        dummyTodo.add(newTodo)
         _todosFlow.update { dummyTodo.toList() }
     }
 
