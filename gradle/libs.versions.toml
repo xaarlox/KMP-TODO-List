@@ -14,14 +14,14 @@ androidx-testExt = "1.2.1"
 composeHotReload = "1.0.0-alpha11"
 composeMultiplatform = "1.8.2"
 junit = "4.13.2"
-kotlin = "2.1.21"
+kotlin = "2.1.20"
 kotlinx-coroutines = "1.10.2"
 navigationCompose = "2.8.0-alpha10"
 room = "2.7.1"
 roomKtx = "2.7.1"
 sqlite = "2.5.1"
 koin = "4.1.0"
-ksp = "2.1.21-2.0.1"
+ksp = "2.1.20-2.0.1"
 
 [libraries]
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }

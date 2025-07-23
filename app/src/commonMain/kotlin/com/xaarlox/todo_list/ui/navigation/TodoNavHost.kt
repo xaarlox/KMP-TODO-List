@@ -7,11 +7,14 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.xaarlox.todo_list.ui.screens.EditTodoScreen
 import com.xaarlox.todo_list.ui.screens.LoadingScreen
 import com.xaarlox.todo_list.ui.screens.TodosScreen
 import com.xaarlox.todo_list.ui.util.Routes
+import com.xaarlox.todo_list.ui.viewmodels.mvi.EditTodoViewModel
 import com.xaarlox.todo_list.ui.viewmodels.mvvm.TodosViewModel
 import org.koin.compose.viewmodel.koinViewModel
+import org.koin.core.parameter.parametersOf
 
 @Composable
 fun TodoNavHost(
@@ -42,7 +45,15 @@ fun TodoNavHost(
                     defaultValue = -1
                 }
             )
-        ) {
+        ) { backStackEntry ->
+            val editTodoViewModel =
+                koinViewModel<EditTodoViewModel> { parametersOf(backStackEntry.savedStateHandle) }
+            EditTodoScreen(
+                viewModel = editTodoViewModel,
+                onPopBackStack = {
+                    navController.popBackStack()
+                }
+            )
         }
     }
 }
