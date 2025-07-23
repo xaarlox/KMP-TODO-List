@@ -26,6 +26,11 @@ actual class TodoRepository {
     }
 
     actual suspend fun deleteTodo(todo: Todo) {
+        val index = dummyTodo.indexOfFirst { it.id == todo.id }
+        if (index != -1) {
+            dummyTodo.removeAt(index)
+            _todosFlow.update { dummyTodo.toList() }
+        }
     }
 
     actual suspend fun getTodoById(id: Int): Todo? {
