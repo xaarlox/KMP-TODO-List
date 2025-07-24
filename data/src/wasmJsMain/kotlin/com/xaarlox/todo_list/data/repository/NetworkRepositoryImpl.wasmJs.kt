@@ -17,7 +17,7 @@ actual class NetworkRepositoryImpl : NetworkRepository {
     }
 }
 
-internal fun createHttpClient(): HttpClient {
+private fun createHttpClient(): HttpClient {
     return HttpClient(Js) {
         install(ContentNegotiation) {
             json(Json {

@@ -64,6 +64,7 @@ kotlin {
 }
 
 android {
+    namespace = "com.xaarlox.todo_list.data"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
@@ -74,8 +75,6 @@ android {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-
-    namespace = "com.xaarlox.todo_list.data"
 }
 
 room {

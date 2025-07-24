@@ -20,7 +20,7 @@ actual fun platformModule() = module {
     single { get<TodoDatabase>().todoDao() }
 }
 
-fun provideTodoDatabase(context: Context): TodoDatabase {
+private fun provideTodoDatabase(context: Context): TodoDatabase {
     val appContext = context.applicationContext
     return Room.databaseBuilder(
         appContext,

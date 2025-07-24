@@ -1,6 +1,6 @@
 package com.xaarlox.todo_list
 
-class JVMPlatform: Platform {
+class JVMPlatform : Platform {
     override val name: String = "Java ${System.getProperty("java.version")}"
 }
 

@@ -54,16 +54,15 @@ kotlin {
 }
 
 android {
-    compileSdk = 35
+    namespace = "com.xaarlox.todo_list.app"
+    compileSdk = libs.versions.android.compileSdk.get().toInt()
 
     defaultConfig {
-        minSdk = 24
+        minSdk = libs.versions.android.minSdk.get().toInt()
     }
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
     }
-
-    namespace = "com.xaarlox.todo_list.app"
 }

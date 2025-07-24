@@ -1,6 +1,6 @@
 package com.xaarlox.todo_list
 
-class WasmPlatform: Platform {
+class WasmPlatform : Platform {
     override val name: String = "Web with Kotlin/Wasm"
 }
 
