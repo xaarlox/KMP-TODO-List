@@ -3,8 +3,8 @@ package com.xaarlox.todo_list.ui.viewmodels.mvi
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.xaarlox.todo_list.data.repository.TodoRepository
 import com.xaarlox.todo_list.domain.model.Todo
+import com.xaarlox.todo_list.domain.repository.TodoRepository
 import com.xaarlox.todo_list.ui.util.UiEvent
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow

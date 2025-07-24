@@ -1,11 +1,12 @@
 package com.xaarlox.todo_list.data.repository
 
 import com.xaarlox.todo_list.domain.model.Todo
+import com.xaarlox.todo_list.domain.repository.TodoRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
 
-actual class TodoRepository {
+actual class TodoRepositoryImpl : TodoRepository {
     private val dummyTodo = mutableListOf(
         Todo(id = 1, title = "todo1", description = "todo", isDone = false),
         Todo(id = 2, title = "todo2", description = "todo", isDone = false),
@@ -14,7 +15,7 @@ actual class TodoRepository {
     )
     private val _todosFlow = MutableStateFlow(dummyTodo.toList())
 
-    actual suspend fun insertTodo(todo: Todo) {
+    actual override suspend fun insertTodo(todo: Todo) {
         todo.id?.takeIf { it > 0 }?.let { id ->
             val index = dummyTodo.indexOfFirst { it.id == id }
             if (index != -1) {
@@ -29,7 +30,7 @@ actual class TodoRepository {
         _todosFlow.update { dummyTodo.toList() }
     }
 
-    actual suspend fun deleteTodo(todo: Todo) {
+    actual override suspend fun deleteTodo(todo: Todo) {
         val index = dummyTodo.indexOfFirst { it.id == todo.id }
         if (index != -1) {
             dummyTodo.removeAt(index)
@@ -37,9 +38,9 @@ actual class TodoRepository {
         }
     }
 
-    actual suspend fun getTodoById(id: Int): Todo? {
+    actual override suspend fun getTodoById(id: Int): Todo? {
         return dummyTodo.find { it.id == id }
     }
 
-    actual fun getTodos(): Flow<List<Todo>> = _todosFlow
+    actual override fun getTodos(): Flow<List<Todo>> = _todosFlow
 }

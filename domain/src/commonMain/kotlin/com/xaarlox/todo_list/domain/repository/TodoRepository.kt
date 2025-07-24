@@ -1,9 +1,9 @@
-package com.xaarlox.todo_list.data.repository
+package com.xaarlox.todo_list.domain.repository
 
 import com.xaarlox.todo_list.domain.model.Todo
 import kotlinx.coroutines.flow.Flow
 
-expect class TodoRepository() {
+interface TodoRepository {
     suspend fun insertTodo(todo: Todo)
     suspend fun deleteTodo(todo: Todo)
     suspend fun getTodoById(id: Int): Todo?

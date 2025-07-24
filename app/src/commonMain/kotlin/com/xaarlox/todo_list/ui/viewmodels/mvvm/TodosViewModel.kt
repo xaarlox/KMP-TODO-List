@@ -2,9 +2,9 @@ package com.xaarlox.todo_list.ui.viewmodels.mvvm
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.xaarlox.todo_list.data.repository.TodoRepository
 import com.xaarlox.todo_list.domain.model.Todo
 import com.xaarlox.todo_list.domain.repository.NetworkRepository
+import com.xaarlox.todo_list.domain.repository.TodoRepository
 import com.xaarlox.todo_list.ui.util.Routes
 import com.xaarlox.todo_list.ui.util.UiEvent
 import kotlinx.coroutines.channels.Channel
