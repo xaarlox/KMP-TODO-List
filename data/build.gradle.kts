@@ -38,6 +38,13 @@ kotlin {
             implementation(libs.ktor.client.content.negotiation)
             implementation(libs.ktor.serialization.kotlinx.json)
         }
+        androidUnitTest.dependencies {
+            implementation(libs.junit)
+            implementation(libs.mockk)
+            implementation(libs.androidx.core.testing)
+            implementation(libs.ktor.client.mock)
+            implementation(libs.kotlinx.coroutines.test)
+        }
         commonMain.dependencies {
             implementation(project(":domain"))
 
