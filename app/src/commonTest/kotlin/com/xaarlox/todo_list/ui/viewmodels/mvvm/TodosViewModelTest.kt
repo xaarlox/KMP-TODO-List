@@ -43,7 +43,7 @@ class TodosViewModelTest {
     }
 
     @Test
-    fun `should emit initial todos when ViewModel is initialized`() = runTest {
+    fun initializeViewModel_shouldEmitInitialEmptyTodos() = runTest {
         createViewModel()
         viewModel.todos.test {
             assertEquals(emptyList(), awaitItem())
@@ -52,7 +52,7 @@ class TodosViewModelTest {
     }
 
     @Test
-    fun `should fetch user IP when ViewModel is initialized`() = runTest {
+    fun initializeViewModel_shouldFetchAndDisplayUserIp() = runTest {
         createViewModel()
         testDispatcher.scheduler.advanceUntilIdle()
         viewModel.userIp.test {
@@ -61,7 +61,7 @@ class TodosViewModelTest {
     }
 
     @Test
-    fun `should set error message when fetching user IP fails`() = runTest {
+    fun fetchUserIpWithNetworkError_shouldSetErrorMessage() = runTest {
         val errorNetworkRepository = object : FakeNetworkRepository() {
             override suspend fun getUserIp(): String {
                 throw RuntimeException("Network error")
@@ -76,7 +76,7 @@ class TodosViewModelTest {
     }
 
     @Test
-    fun `should emit Navigate UiEvent with todoId when OnTodoClick is triggered`() = runTest {
+    fun clickOnTodo_shouldEmitNavigateUiEventWithTodoId() = runTest {
         createViewModel()
         expectSingleUiEvent(UiEvent.Navigate(Routes.EDIT_TODO + "?todoId=${testTodo.id}")) {
             viewModel.onEvent(TodosEvent.OnTodoClick(testTodo))
@@ -84,7 +84,7 @@ class TodosViewModelTest {
     }
 
     @Test
-    fun `should emit Navigate UiEvent without ID when OnAddTodoClick is triggered`() = runTest {
+    fun clickOnAddTodo_shouldEmitNavigateUiEventWithoutId() = runTest {
         createViewModel()
         expectSingleUiEvent(UiEvent.Navigate(Routes.EDIT_TODO)) {
             viewModel.onEvent(TodosEvent.OnAddTodoClick)
@@ -92,7 +92,7 @@ class TodosViewModelTest {
     }
 
     @Test
-    fun `should call deleteTodo on repository when OnDeleteTodoClick is triggered`() = runTest {
+    fun clickOnDeleteTodo_shouldRemoveTodoFromRepository() = runTest {
         fakeTodoRepository.insertTodo(testTodo)
         viewModel = TodosViewModel(fakeTodoRepository, fakeNetworkRepository)
         viewModel.onEvent(TodosEvent.OnDeleteTodoClick(testTodo))
@@ -102,7 +102,7 @@ class TodosViewModelTest {
     }
 
     @Test
-    fun `should insert completed todo and show congrats snackbar when OnDoneChange is true`() =
+    fun markTodoAsCompleted_shouldInsertCompletedTodoAndShowCongratsSnackbar() =
         runTest {
             createViewModel()
             expectSingleUiEvent(UiEvent.ShowSnackBar("Congrats! Todo completed!")) {
@@ -114,7 +114,7 @@ class TodosViewModelTest {
         }
 
     @Test
-    fun `should insert incomplete todo and show oops snackbar when OnDoneChange is false`() =
+    fun markTodoAsIncomplete_shouldInsertIncompleteTodoAndShowOopsSnackbar() =
         runTest {
             createViewModel()
             expectSingleUiEvent(UiEvent.ShowSnackBar("Oops... Todo marked as incomplete ;(")) {

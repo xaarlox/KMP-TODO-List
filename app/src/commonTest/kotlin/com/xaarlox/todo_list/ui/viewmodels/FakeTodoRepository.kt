@@ -3,24 +3,26 @@ package com.xaarlox.todo_list.ui.viewmodels
 import com.xaarlox.todo_list.domain.model.Todo
 import com.xaarlox.todo_list.domain.repository.TodoRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.MutableStateFlow
 
 class FakeTodoRepository : TodoRepository {
-    private val initialTodos = mutableListOf<Todo>()
+    private val todosFlow = MutableStateFlow<List<Todo>>(emptyList())
 
     override suspend fun insertTodo(todo: Todo) {
-        initialTodos.add(todo)
+        todosFlow.value = todosFlow.value.filterNot { it.id == todo.id } + todo
     }
 
     override suspend fun deleteTodo(todo: Todo) {
-        initialTodos.remove(todo)
+        todosFlow.value = todosFlow.value.filterNot { it.id == todo.id }
     }
 
     override suspend fun getTodoById(id: Int): Todo? {
-        return initialTodos.find { it.id == id }
+        return todosFlow.value.find { it.id == id }
     }
 
-    override fun getTodos(): Flow<List<Todo>> {
-        return flow { emit(initialTodos) }
+    override fun getTodos(): Flow<List<Todo>> = todosFlow
+
+    fun addTodo(todo: Todo) {
+        todosFlow.value += todo
     }
 }

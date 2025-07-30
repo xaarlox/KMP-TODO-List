@@ -18,6 +18,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -89,7 +91,8 @@ fun EditTodoItem(
             colors = CheckboxDefaults.colors(
                 checkedColor = LightPurple,
                 uncheckedColor = MyPurple
-            )
+            ),
+            modifier = Modifier.semantics { contentDescription = "Checkbox" }
         )
         Spacer(modifier = Modifier.height(8.dp))
         Text(

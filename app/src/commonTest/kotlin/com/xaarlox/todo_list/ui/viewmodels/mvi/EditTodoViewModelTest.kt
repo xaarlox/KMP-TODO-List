@@ -40,26 +40,26 @@ class EditTodoViewModelTest {
     }
 
     @Test
-    fun `should update title in state when OnTitleChanged intent is received`() = runTest {
+    fun changeTitle_shouldUpdateTitleInState() = runTest {
         editTodoViewModel.onIntent(EditTodoIntent.OnTitleChanged("Test title"))
         assertEquals("Test title", editTodoViewModel.state.value.title)
     }
 
     @Test
-    fun `should update description in state when OnDescriptionChanged intent is received`() =
+    fun changeDescription_shouldUpdateDescriptionInState() =
         runTest {
             editTodoViewModel.onIntent(EditTodoIntent.OnDescriptionChanged("Test description"))
             assertEquals("Test description", editTodoViewModel.state.value.description)
         }
 
     @Test
-    fun `should update isDone in state when OnIsDoneChanged intent is received`() = runTest {
+    fun changeIsDone_shouldUpdateIsDoneInState() = runTest {
         editTodoViewModel.onIntent(EditTodoIntent.OnIsDoneChanged(true))
         assertTrue(editTodoViewModel.state.value.isDone)
     }
 
     @Test
-    fun `should emit snackbar with error message when saving todo with blank title`() = runTest {
+    fun saveTodoWithBlankTitle_shouldEmitSnackbarWithErrorMessage() = runTest {
         editTodoViewModel.onIntent(EditTodoIntent.OnTitleChanged(""))
         editTodoViewModel.uiEffect.test {
             editTodoViewModel.onIntent(EditTodoIntent.OnSaveTodoClick)
@@ -71,7 +71,7 @@ class EditTodoViewModelTest {
     }
 
     @Test
-    fun `should save todo and emit success and navigation events when valid data is provided`() =
+    fun saveTodoWithValidData_shouldSaveTodoAndEmitSuccessAndNavigationEvents() =
         runTest {
             editTodoViewModel.onIntent(EditTodoIntent.OnTitleChanged("Title"))
             editTodoViewModel.onIntent(EditTodoIntent.OnDescriptionChanged("Description"))
@@ -94,7 +94,7 @@ class EditTodoViewModelTest {
         }
 
     @Test
-    fun `should load todo from repository when initialized with todoId`() = runTest {
+    fun initializedWithTodoId_shouldLoadTodoFromRepository() = runTest {
         val todo = Todo(1, "Title", "Description", false)
         fakeRepository.insertTodo(todo)
 
